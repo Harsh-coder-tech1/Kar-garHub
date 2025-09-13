@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KarīgarHub - AI-Powered Artisan E-commerce Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2>KarīgarHub</h2>
+            <p>Empowering Indian Artisans with AI</p>
+        </div>
+    </div>
+
+    <!-- Authentication Page -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-hero">
+                <h1>KarīgarHub</h1>
+                <p>भारतीय कारीगरों के लिए AI-संचालित ई-कॉमर्स प्लेटफॉर्म</p>
+                <p>AI-Powered E-commerce Platform for Indian Artisans</p>
+            </div>
+            
+            <div class="auth-forms">
+                <div id="login-form" class="auth-form active">
+                    <h2>Welcome Back</h2>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Email / मोबाइल नंबर</label>
+                            <input type="text" class="form-control" placeholder="Enter your email or mobile">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password / पासवर्ड</label>
+                            <input type="password" class="form-control" placeholder="Enter your password">
+                        </div>
+                        <button type="button" class="btn btn--primary btn--full-width" onclick="login()">
+                            <i class="fas fa-sign-in-alt"></i> Login / लॉगिन करें
+                        </button>
+                    </form>
+                    <p class="auth-switch">
+                        New to KarīgarHub? <a href="#" onclick="showRegister()">Register here / यहाँ पंजीकरण करें</a>
+                    </p>
+                </div>
+
+                <div id="register-form" class="auth-form">
+                    <h2>Join KarīgarHub</h2>
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Full Name / पूरा नाम</label>
+                            <input type="text" class="form-control" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email / ईमेल</label>
+                            <input type="email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Mobile Number / मोबाइल नंबर</label>
+                            <input type="tel" class="form-control" placeholder="Enter your mobile number">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Location / स्थान</label>
+                            <input type="text" class="form-control" placeholder="City, State">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Craft Specialization / शिल्प विशेषज्ञता</label>
+                            <select class="form-control">
+                                <option>Select your craft / अपना शिल्प चुनें</option>
+                                <option>Block Print Textiles / ब्लॉक प्रिंट वस्त्र</option>
+                                <option>Pottery / मिट्टी के बर्तन</option>
+                                <option>Wood Carving / लकड़ी की नक्काशी</option>
+                                <option>Jewelry Making / आभूषण निर्माण</option>
+                                <option>Leather Craft / चमड़े का काम</option>
+                                <option>Metal Work / धातु का काम</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn--primary btn--full-width" onclick="register()">
+                            <i class="fas fa-user-plus"></i> Register / पंजीकरण करें
+                        </button>
+                    </form>
+                    <p class="auth-switch">
+                        Already have an account? <a href="#" onclick="showLogin()">Login here / यहाँ लॉगिन करें</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-app" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>KarīgarHub</h1>
+                    <span class="tagline">AI-Powered</span>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="language-switcher">
+                        <button id="lang-btn" class="btn btn--outline btn--sm" onclick="toggleLanguage()">
+                            <i class="fas fa-language"></i> <span id="lang-text">हिंदी</span>
+                        </button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="profile-info">
+                            <span class="profile-name">Priya Sharma</span>
+                            <span class="profile-location">Jaipur, Rajasthan</span>
+                        </div>
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#" onclick="showPage('dashboard')" class="nav-link active" data-page="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+                </a></li>
+                <li><a href="#" onclick="showPage('products')" class="nav-link" data-page="products">
+                    <i class="fas fa-box"></i> <span>Products</span>
+                </a></li>
+                <li><a href="#" onclick="showPage('ai-features')" class="nav-link" data-page="ai-features">
+                    <i class="fas fa-robot"></i> <span>AI Features</span>
+                </a></li>
+                <li><a href="#" onclick="showPage('platforms')" class="nav-link" data-page="platforms">
+                    <i class="fas fa-store"></i> <span>Platforms</span>
+                </a></li>
+                <li><a href="#" onclick="showPage('analytics')" class="nav-link" data-page="analytics">
+                    <i class="fas fa-chart-bar"></i> <span>Analytics</span>
+                </a></li>
+                <li><a href="#" onclick="showPage('orders')" class="nav-link" data-page="orders">
+                    <i class="fas fa-shopping-cart"></i> <span>Orders</span>
+                </a></li>
+                <li><a href="#" onclick="showPage('settings')" class="nav-link" data-page="settings">
+                    <i class="fas fa-cog"></i> <span>Settings</span>
+                </a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="content-page active">
+                <div class="page-header">
+                    <h2>Dashboard Overview</h2>
+                    <p>Welcome back, Priya! Here's your business summary.</p>
+                </div>
+
+                <!-- Key Metrics Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value">45</span>
+                            <span class="metric-label">Total Products</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value">2,850</span>
+                            <span class="metric-label">Total Sales</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value">₹4,25,000</span>
+                            <span class="metric-label">Revenue</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="metric-info">
+                            <span class="metric-value">4.8</span>
+                            <span class="metric-label">Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Insights Panel -->
+                <div class="insights-section">
+                    <h3>AI-Powered Insights</h3>
+                    <div class="insights-grid">
+                        <div class="insight-card">
+                            <div class="insight-header">
+                                <i class="fas fa-chart-line"></i>
+                                <span class="insight-type">Price Optimization</span>
+                            </div>
+                            <p>Increase price of 'Handwoven Bedsheet Set' by 6% to maximize profit while maintaining competitiveness</p>
+                            <div class="insight-impact">+₹15,000 potential monthly revenue</div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-header">
+                                <i class="fas fa-crystal-ball"></i>
+                                <span class="insight-type">Demand Forecast</span>
+                            </div>
+                            <p>Ceramic products show 35% increased demand expected for upcoming festival season</p>
+                            <div class="insight-impact">Stock up inventory by October 1st</div>
+                        </div>
+                        <div class="insight-card">
+                            <div class="insight-header">
+                                <i class="fas fa-store"></i>
+                                <span class="insight-type">Platform Recommendation</span>
+                            </div>
+                            <p>Your leather products perform 40% better on Etsy compared to other platforms</p>
+                            <div class="insight-impact">Focus marketing efforts on Etsy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>Order Delivered:</strong> Leather Journal to Sarah Johnson</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon info">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>New Product Added:</strong> Ceramic Handpainted Vase</p>
+                                <span class="activity-time">5 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>Low Inventory Alert:</strong> Handwoven Bedsheet Set (5 left)</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Page -->
+            <div id="products" class="content-page">
+                <div class="page-header">
+                    <h2>Product Management</h2>
+                    <button class="btn btn--primary" onclick="showAddProductModal()">
+                        <i class="fas fa-plus"></i> Add New Product
+                    </button>
+                </div>
+
+                <div class="products-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search products..." id="product-search">
+                    </div>
+                    <div class="view-toggle">
+                        <button class="btn btn--outline btn--sm active" onclick="toggleView('grid')">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="btn btn--outline btn--sm" onclick="toggleView('list')">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="products-grid" class="products-grid">
+                    <!-- Products will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- AI Features Page -->
+            <div id="ai-features" class="content-page">
+                <div class="page-header">
+                    <h2>AI-Powered Features</h2>
+                    <p>Enhance your products and optimize your business with AI</p>
+                </div>
+
+                <div class="ai-features-grid">
+                    <div class="ai-feature-card">
+                        <div class="ai-feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3>Image Enhancement</h3>
+                        <p>Automatically enhance your product images for better visibility and appeal</p>
+                        <button class="btn btn--primary" onclick="showImageEnhancement()">Try Now</button>
+                    </div>
+
+                    <div class="ai-feature-card">
+                        <div class="ai-feature-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <h3>Smart Descriptions</h3>
+                        <p>Generate compelling product descriptions in multiple languages</p>
+                        <button class="btn btn--primary" onclick="showDescriptionGenerator()">Generate</button>
+                    </div>
+
+                    <div class="ai-feature-card">
+                        <div class="ai-feature-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <h3>Price Optimization</h3>
+                        <p>Get AI-powered pricing recommendations based on market analysis</p>
+                        <button class="btn btn--primary" onclick="showPriceOptimization()">Optimize</button>
+                    </div>
+
+                    <div class="ai-feature-card">
+                        <div class="ai-feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Demand Forecasting</h3>
+                        <p>Predict future demand trends for your products</p>
+                        <button class="btn btn--primary" onclick="showDemandForecast()">View Forecast</button>
+                    </div>
+                </div>
+
+                <!-- AI Feature Modals will be shown here -->
+                <div id="ai-feature-content" class="ai-feature-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analytics" class="content-page">
+                <div class="page-header">
+                    <h2>Analytics Dashboard</h2>
+                    <p>Track your performance and insights</p>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="chart-container">
+                        <h3>Monthly Sales Trend</h3>
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Platform Revenue Distribution</h3>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Category Performance</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Order Trends</h3>
+                        <canvas id="ordersChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Page -->
+            <div id="orders" class="content-page">
+                <div class="page-header">
+                    <h2>Order Management</h2>
+                    <p>Track and manage all your orders</p>
+                </div>
+
+                <div class="orders-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Product</th>
+                                <th>Customer</th>
+                                <th>Platform</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody">
+                            <!-- Orders will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Platforms Page -->
+            <div id="platforms" class="content-page">
+                <div class="page-header">
+                    <h2>Platform Integration</h2>
+                    <p>Connect and manage your e-commerce platforms</p>
+                </div>
+
+                <div class="platforms-grid">
+                    <div class="platform-card connected">
+                        <div class="platform-header">
+                            <div class="platform-logo amazon"></div>
+                            <div class="platform-status">
+                                <span class="status status--success">Connected</span>
+                            </div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-value">35</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">1,845</span>
+                                <span class="stat-label">Sales</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline btn--full-width">Manage</button>
+                    </div>
+
+                    <div class="platform-card connected">
+                        <div class="platform-header">
+                            <div class="platform-logo flipkart"></div>
+                            <div class="platform-status">
+                                <span class="status status--success">Connected</span>
+                            </div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-value">28</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">1,240</span>
+                                <span class="stat-label">Sales</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline btn--full-width">Manage</button>
+                    </div>
+
+                    <div class="platform-card connected">
+                        <div class="platform-header">
+                            <div class="platform-logo etsy"></div>
+                            <div class="platform-status">
+                                <span class="status status--success">Connected</span>
+                            </div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-value">42</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">2,156</span>
+                                <span class="stat-label">Sales</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--outline btn--full-width">Manage</button>
+                    </div>
+
+                    <div class="platform-card disconnected">
+                        <div class="platform-header">
+                            <div class="platform-logo jiomart"></div>
+                            <div class="platform-status">
+                                <span class="status status--warning">Pending</span>
+                            </div>
+                        </div>
+                        <div class="platform-stats">
+                            <div class="stat">
+                                <span class="stat-value">0</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">0</span>
+                                <span class="stat-label">Sales</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary btn--full-width" onclick="connectPlatform('JioMart')">Connect</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settings" class="content-page">
+                <div class="page-header">
+                    <h2>Settings & Configuration</h2>
+                    <p>Manage your account and preferences</p>
+                </div>
+
+                <div class="settings-sections">
+                    <div class="settings-section">
+                        <h3>Account Information</h3>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" value="Priya Sharma">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="priya.sharma@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" value="Jaipur, Rajasthan">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Business Settings</h3>
+                        <div class="form-group">
+                            <label class="form-label">Business Name</label>
+                            <input type="text" class="form-control" value="Rajasthani Crafts">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Specialization</label>
+                            <select class="form-control">
+                                <option selected>Block Print Textiles</option>
+                                <option>Pottery</option>
+                                <option>Wood Carving</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Preferences</h3>
+                        <div class="form-group">
+                            <label class="form-label">Language Preference</label>
+                            <select class="form-control">
+                                <option>English</option>
+                                <option selected>हिंदी (Hindi)</option>
+                                <option>తెలుగు (Telugu)</option>
+                                <option>বাংলা (Bengali)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Currency</label>
+                            <select class="form-control">
+                                <option selected>INR (₹)</option>
+                                <option>USD ($)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div id="chatbot" class="chatbot">
+        <div class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-robot"></i>
+        </div>
+        
+        <div class="chatbot-window hidden" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Assistant</span>
+                </div>
+                <button class="chatbot-close" onclick="toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message assistant">
+                    <div class="message-content">
+                        Hello! I'm your AI assistant. How can I help you today? मैं आपकी कैसे सहायता कर सकता हूं?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chat-input" placeholder="Type your message... अपना संदेश टाइप करें...">
+                <button onclick="sendMessage()" class="btn btn--primary btn--sm">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div id="modal-content" class="modal-content">
+            <!-- Dynamic modal content will be inserted here -->
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
