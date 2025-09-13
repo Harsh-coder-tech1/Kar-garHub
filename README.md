@@ -4,7 +4,7 @@
 KarīgarHub is an AI-powered multi-platform e-commerce web application designed for Indian artisans to list, manage, and sell their handmade products across platforms like Amazon, Flipkart, Etsy, and JioMart with a single click.
 
 ## Features
-- User authentication & bilingual support in English and Hindi
+- User authentication & biling support in English and Hindi
 - AI-powered product photo enhancement & description generation
 - Dynamic price optimization using neural networks
 - Real-time analytics dashboard
